@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask Her Out</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        input, select, button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ask Her Out</h1>
+        <form id="dateForm">
+            <label for="question">Do you want to go on a date?</label>
+            <select id="question" required>
+                <option value="">-- Select an option --</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <div id="details" style="display: none;">
+                <label for="date">When should the date be?</label>
+                <input type="date" id="date" required>
+
+                <label for="activity">What should we do?</label>
+                <input type="text" id="activity" placeholder="e.g., Dinner, Movie" required>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="response" class="message"></div>
+    </div>
+
+    <script>
+        const questionSelect = document.getElementById('question');
+        const detailsDiv = document.getElementById('details');
+        const dateForm = document.getElementById('dateForm');
+        const responseDiv = document.getElementById('response');
+
+        questionSelect.addEventListener('change', () => {
+            if (questionSelect.value === 'yes') {
+                detailsDiv.style.display = 'block';
+            } else {
+                detailsDiv.style.display = 'none';
+            }
+        });
+
+        dateForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const question = questionSelect.value;
+            const date = document.getElementById('date').value;
+            const activity = document.getElementById('activity').value;
+
+            if (question === 'yes') {
+                responseDiv.textContent = `Great! Let's go on a date on ${date} and do ${activity}.`;
+            } else {
+                responseDiv.textContent = `Oh no! Maybe another time.`;
+            }
+        });
+    </script>
+</body>
+</html>
